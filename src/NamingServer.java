@@ -20,7 +20,8 @@ public class NamingServer
 
         InetAddress ip = InetAddress.getByName(address);
 
+        System.out.println("test commit - Stefan");
         //int hashFileName = Math.abs(filename.hashCode() % 32768);
-
+        //Comment from Stefan
     }
 }
