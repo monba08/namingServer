@@ -1,27 +1,29 @@
-import java.net.InetAddress;
+
+import java.net.MalformedURLException;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+
 public class NamingServer
 {
-    static String filename;
+
     static SortedMap<Integer, String> sm = new TreeMap<Integer, String>();
 
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws UnknownHostException, MalformedURLException {
         System.out.print("Naming Server (code written by group 6)\n");
 
-        // Give an address
-        String address = "";
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\nEnter Server Address: ");
-        address = sc.nextLine();
+        try{
+            NamingServerExecute namingServerExecute = new NamingServerExecute();
+            LocateRegistry.createRegistry(1099);
+            Naming.rebind("rmi://localhost/NamingServerInterface", namingServerExecute);
+            System.out.println("Server is running...");
 
-        InetAddress ip = InetAddress.getByName(address);
-
-        System.out.println("test commit - Stefan");
-        //int hashFileName = Math.abs(filename.hashCode() % 32768);
-        //Comment from Stefan
+        }catch(RemoteException e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
