@@ -24,6 +24,7 @@ public class NamingServer
 
         }catch(RemoteException e){
             System.out.println("Error: " + e.getMessage());
+            //PLEASE WORK PLEASE -- Monba 2017
         }
     }
 }
